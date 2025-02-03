@@ -34,7 +34,7 @@ Content-Type: application/json
 }
 
 ### Mettre à jour un item
-PUT http://localhost:1888/items/67a09981bcae68475b85fbe4
+PUT http://localhost:80/items/67a09981bcae68475b85fbe4
 Content-Type: application/json
 
 {

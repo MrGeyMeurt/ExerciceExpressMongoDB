@@ -92,6 +92,16 @@ app.post("/items/price-range-sort", async (req, res) => {
 });
 
 // Mettre à jour un item
+app.get("/items/:id", async (req, res) => {
+    try {
+        const document = await Item.findById(req.params.id);
+        res.status(200).json(document);
+    } catch (error) {
+        res.status(404).json({ error: ( error as Error).message });
+    }
+});
+
+// Mettre à jour un item
 app.put("/items/:id", async (req, res) => {
     try {
         const updatedItem = await Item.findByIdAndUpdate(req.params.id, req.body, { new: true });
