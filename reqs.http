@@ -1,0 +1,27 @@
+### Créer un item
+PUT http://localhost:80/items
+Content-Type: application/json
+
+{
+    "name": "Exemple Item",
+    "description": "Ceci est un exemple",
+    "price": 100,
+    "addProps": true
+}
+
+### Lire tous les items
+GET http://localhost:80/items
+
+### Mettre à jour un item
+PUT http://localhost:80/items/67a09981bcae68475b85fbe4
+Content-Type: application/json
+
+{
+    "name": "Item mis à jour",
+    "description": "Nouvelle description",
+    "price": 150,
+    "addProps": true
+}
+
+### Supprimer un item
+DELETE http://localhost:80/items/67a09981bcae68475b85fbe4
