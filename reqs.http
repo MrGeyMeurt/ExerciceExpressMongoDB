@@ -1,19 +1,40 @@
 ### Créer un item
-PUT http://localhost:80/items
+PUT http://localhost:1888/items
 Content-Type: application/json
 
 {
     "name": "Exemple Item",
     "description": "Ceci est un exemple",
-    "price": 100,
+    "price": 40,
     "addProps": true
 }
 
 ### Lire tous les items
-GET http://localhost:80/items
+GET http://localhost:1888/items
+
+### Lire un item
+GET http://localhost:1888/67a09ed8bc155dc427fa4331
+
+### Lire un item dont le prix est entre 20 et 30 euros
+POST http://localhost:1888/items/price-range
+Content-Type: application/json
+
+{
+    "min": 20,
+    "max": 30
+}
+
+### Lire un item dont le prix est entre 20 et 30 euros et trié par prix décroissant
+POST http://localhost:1888/items/price-range-sort
+Content-Type: application/json
+
+{
+    "min": 20,
+    "max": 30
+}
 
 ### Mettre à jour un item
-PUT http://localhost:80/items/67a09981bcae68475b85fbe4
+PUT http://localhost:1888/items/67a09981bcae68475b85fbe4
 Content-Type: application/json
 
 {
@@ -24,4 +45,4 @@ Content-Type: application/json
 }
 
 ### Supprimer un item
-DELETE http://localhost:80/items/67a09981bcae68475b85fbe4
+DELETE http://localhost:1888/items/67a09ed8bc155dc427fa4331

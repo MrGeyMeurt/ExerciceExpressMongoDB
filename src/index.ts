@@ -30,7 +30,7 @@ mongoose.connect(MONGO_URI, {
 const itemSchema = new mongoose.Schema({
     name: { type: String, required: true },
     description: String,
-    price: Number,
+    price: { type: Number, required: true },
     addProps: Boolean
 }, { timestamps: true });
 
@@ -53,6 +53,38 @@ app.put("/items", async (req: Request, res: Response) => {
 app.get("/items", async (req: Request, res: Response) => {
     try {
         const items = await Item.find();
+        res.status(200).json(items);
+    } catch (error) {
+        res.status(500).json({ error: ( error as Error).message });
+    }
+});
+
+// Lire un item
+app.get("/items/:id", async (req, res) => {
+    try {
+        const document = await Item.findById(req.params.id);
+        res.status(200).json(document);
+    } catch (error) {
+        res.status(500).json({ error: ( error as Error).message });
+    }
+});
+
+// Lire un item dont le prix est entre 20 et 30 euros
+app.post("/items/price-range", async (req: Request, res: Response) => {
+    const { min, max } = req.body;
+    try {
+        const items = await Item.find({ price: { $gte: min, $lte: max } });
+        res.status(200).json(items);
+    } catch (error) {
+        res.status(500).json({ error: (error as Error).message });
+    }
+});
+
+// Lire un item dont le prix est entre 20 et 30 euros et trié par prix décroissant
+app.post("/items/price-range-sort", async (req, res) => {
+    const { min, max } = req.body;
+    try {
+        const items = await Item.find({ price: { $gte: min, $lte: max } }).sort({ price: -1 });
         res.status(200).json(items);
     } catch (error) {
         res.status(500).json({ error: ( error as Error).message });
