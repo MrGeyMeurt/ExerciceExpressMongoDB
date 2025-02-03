@@ -12,8 +12,11 @@ Content-Type: application/json
 ### Lire tous les items
 GET http://localhost:80/items
 
+### Lire un item
+GET http://localhost:80/items/67a0a07190fdd80ccd1dd013
+
 ### Mettre à jour un item
-PUT http://localhost:80/items/67a09981bcae68475b85fbe4
+PUT http://localhost:80/items/67a09a00c2bf2d430357cfc6
 Content-Type: application/json
 
 {

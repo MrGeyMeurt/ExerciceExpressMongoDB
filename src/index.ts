@@ -30,7 +30,7 @@ mongoose.connect(MONGO_URI, {
 const itemSchema = new mongoose.Schema({
     name: { type: String, required: true },
     description: String,
-    price: Number,
+    price: { type: Number, required: true },
     addProps: Boolean
 }, { timestamps: true });
 
@@ -56,6 +56,16 @@ app.get("/items", async (req: Request, res: Response) => {
         res.status(200).json(items);
     } catch (error) {
         res.status(500).json({ error: ( error as Error).message });
+    }
+});
+
+// Mettre à jour un item
+app.get("/items/:id", async (req, res) => {
+    try {
+        const document = await Item.findById(req.params.id);
+        res.status(200).json(document);
+    } catch (error) {
+        res.status(404).json({ error: ( error as Error).message });
     }
 });
 
